@@ -16,13 +16,14 @@
         <%@include file="topMenu.jsp" %>
         <p>${errormsg}</p>
         <c:set var="errormsg" scope="session" value=""></c:set>
-        <h1>LOGIN</h1>
-        <form method="POST" action="home">
-            <p><input type="text" name="username" placeholder="username"/></p>
-            <p><input type="password" name="password" placeholder="password"/></p>
+            <h1>LOGIN</h1>
+            <form method="POST" action="home">
+                <input type="hidden" name="command" value="User"/>
+                <input type="hidden" name="action" value="login"/>
+                <p><input type="text" name="username" placeholder="username" value="${cookie.usernameCookie.value}"/></p>
+            <p><input type="password" name="password" placeholder="password" value="${cookie.pwdCookie.value}"/></p>
+            <p><input type="checkbox" name="checkSave" checked="checked"/>Lembrar usuario e senha</p>
             <p><input type="submit" value="LOGIN"/></p>
-            <input type="hidden" name="command" value="User"/>
-            <input type="hidden" name="action" value="login"/>
         </form>
     </body>
 </html>

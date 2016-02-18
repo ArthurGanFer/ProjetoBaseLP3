@@ -1,5 +1,6 @@
 package com.br.lp3.command;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,15 +29,32 @@ public class UserCommand implements Command {
             case "login":
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
+                String check = request.getParameter("checkSave");
 
                 if ("cacique".equals(username) && "123".equals(password)) {
                     returnPage = "index.jsp";
+
+                    if ("on".equals(check)) {
+                        Cookie c = new Cookie("usernameCookie", username);
+                        c.setMaxAge(60 * 60 * 24 * 7);
+                        response.addCookie(c);
+                        Cookie c2 = new Cookie("pwdCookie", password);
+                        c.setMaxAge(60 * 60 * 24 * 7);
+                        response.addCookie(c2);
+                    } else {
+                        Cookie c = new Cookie("usernameCookie", "");
+                        c.setMaxAge(0);
+                        response.addCookie(c);
+                        Cookie c2 = new Cookie("pwdCookie", "");
+                        c.setMaxAge(0);
+                        response.addCookie(c2);
+                    }
+
                     request.getSession().setAttribute("username", username);
                 } else {
                     request.getSession().setAttribute("errormsg", "Usuario ou senha incorretos");
                     returnPage = "login.jsp";
                 }
-
                 break;
             case "logout":
                 returnPage = "index.jsp";
