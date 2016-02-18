@@ -33,6 +33,6 @@ body{
     padding: 10px;
 }
 
-.topMenu ul li:hover{
-    background-color: #000;
+.topMenu ul li:hover, .selected-menu{
+    background-color: #09ACE3;
 }
